@@ -4,16 +4,16 @@ def summa(nums, target):
         raise TypeError("Данный список пустой")
 
     # проверка target
-    if isinstance(target, str):  # проверка, является ли target строкой
+    if isinstance(target, str):  # является ли target строкой
         raise TypeError("Target должно быть числом, а не строкой")
-    if int(target) != target: # проверка, является ли target нецелым числом
+    if int(target) != target: # является ли target нецелым числом
         raise TypeError("Target должно быть целым числом")
 
     # перебор элементов массива для проверки на соответствие условиям
     for x in nums:
-        if isinstance(x, str):  # Проверка, является ли элемент строкой
+        if isinstance(x, str):  # является ли элемент строкой
             raise TypeError("Все элементы должны быть числами, а не строками")
-        if int(x) != x: # проверка, является ли элемент нецелым числом
+        if int(x) != x: # является ли элемент нецелым числом
             raise TypeError("Все элементы должны быть целыми числами")
 
     # поиск пары чисел
