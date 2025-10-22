@@ -1,4 +1,4 @@
-def gen_bin_tree(height=0, root=3, l_leaf=lambda x: x, r_leaf=lambda y: y):
+def gen_bin_tree(height=6, root=2, l_leaf=lambda x: x*3, r_leaf=lambda y: y+4):
     """Генерация бинарного дерева
     Ключевые аргументы:
         height (int): Высота дерева
@@ -24,7 +24,7 @@ def gen_bin_tree(height=0, root=3, l_leaf=lambda x: x, r_leaf=lambda y: y):
 
 def main():
     """Пример работы генератора бинарного дерева с данными из варианта"""
-    tree = gen_bin_tree(6, 2, l_leaf=lambda x: x * 3, r_leaf=lambda y: y + 4)
+    tree = gen_bin_tree()
     print(tree)
 
 
