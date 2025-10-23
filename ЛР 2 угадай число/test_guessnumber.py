@@ -45,6 +45,10 @@ class TestSumma(unittest.TestCase):
         with self.assertRaises(TypeError):
             main(5, 'incorrect', 1, 10)
 
+    def test_len_list_1(self):
+        """Тест с длиной диапазона равной 1"""
+        self.assertEqual(main(1, 'bin', 1, 1), [1, 1])
+
     #Тесты для input_of_numbers
     def test_input_seq(self):
         """Тест ввода чисел пользователем, последовательный поиск"""
@@ -67,6 +71,9 @@ class TestSumma(unittest.TestCase):
             self.assertEqual(result, [-3, 1])
 
 
+
+
+
     #Тесты для random_numbers
     @patch('main.random.randint')
     def test_random_numbers(self, mock_randint):
@@ -81,5 +88,13 @@ class TestSumma(unittest.TestCase):
         mock_randint.side_effect = [5, 5, 3, 3, 1]
         result = random_numbers(3, 'bin', 1, 10, 5)
         self.assertEqual(result, [3, 1])
+
+
+    @patch('main.random.randint')
+    def test_random_duplicates_binary(self, mock_randint):
+        """Тест бинарного поиска с отсутствием значений в диапазоне"""
+        mock_randint.side_effect = [5, 3, 1, 7, 8]
+        result = random_numbers(2, 'bin', 1, 10, 5)
+        self.assertEqual(result, [None, 3])
 
 

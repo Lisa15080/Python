@@ -32,6 +32,8 @@ def input_of_numbers(target, search_type) -> list[int|None, int]:
     print('Введите числа')
     for i in range(n):
         lst.append(int(input()))
+        if not isinstance(lst[i], int) or not isinstance(lst[i], int):
+            raise TypeError('Вводите числа типа int или float')
     return guess_number(target, lst, search_type)
 
 def random_numbers(target, search_type, start, end, n) -> list[int|None, int]:
