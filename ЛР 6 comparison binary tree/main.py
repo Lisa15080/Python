@@ -3,23 +3,24 @@ import matplotlib.pyplot as plt
 import random
 
 
-def build_tree_recursive(height=6, root=2, l_leaf=lambda x: x*3, r_leaf=lambda y: y+4):
-    """Генерация бинарного дерева рекурсивно
+def build_tree_recursive(height=6, root=2, l_leaf=lambda x: x * 3, r_leaf=lambda y: y + 4):
+    """Генерация бинарного дерева рекурсивно.
+
     Ключевые аргументы:
         height (int): Высота дерева
         root (int): Корень дерева
         l_leaf (callable): Функция для вычисления левого потомка
         r_leaf (callable): Функция для вычисления правого потомка
 
-     Возвращает:
+    Возвращает:
         dict: Бинарное дерево в виде словаря
     """
     if not isinstance(height, int):
         raise TypeError('Высота должна быть целым числом')
-    if not isinstance(root, int) and not isinstance(root, float):
+    if not isinstance(root, (int, float)):
         raise TypeError("Корень должен быть числом")
     if height < 0:
-        raise TypeError("Высота должна быть неотрицательным числом")
+        raise ValueError("Высота должна быть неотрицательным числом")
     if height == 1:
         return {str(root): []}
     if height == 0:
@@ -28,23 +29,24 @@ def build_tree_recursive(height=6, root=2, l_leaf=lambda x: x*3, r_leaf=lambda y
     return {str(root): [build_tree_recursive(height - 1, l_leaf(root), l_leaf, r_leaf), build_tree_recursive(height - 1, r_leaf(root), l_leaf, r_leaf)]}
 
 
-def build_tree_iterative(height=6, root=2, l_leaf=lambda x: x*3, r_leaf=lambda y: y+4):
-    """Генерация бинарного дерева итеративно через циклы
+def build_tree_iterative(height=6, root=2, l_leaf=lambda x: x * 3, r_leaf=lambda y: y + 4):
+    """Генерация бинарного дерева итеративно через циклы.
+
     Ключевые аргументы:
         height (int): Высота дерева
         root (int): Корень дерева
         l_leaf (callable): Функция для вычисления левого потомка
         r_leaf (callable): Функция для вычисления правого потомка
 
-     Возвращает:
+    Возвращает:
         dict: Бинарное дерево в виде словаря
     """
     if not isinstance(height, int):
         raise TypeError('Высота должна быть целым числом')
-    if not isinstance(root, int) and not isinstance(root, float):
+    if not isinstance(root, (int, float)):
         raise TypeError("Корень должен быть числом")
     if height < 0:
-        raise TypeError("Высота должна быть неотрицательным числом")
+        raise ValueError("Высота должна быть неотрицательным числом")
     if height == 1:
         return {str(root): []}
     if height == 0:
@@ -52,9 +54,10 @@ def build_tree_iterative(height=6, root=2, l_leaf=lambda x: x*3, r_leaf=lambda y
 
     tree = {str(root): []}
     cur_level = [(tree[str(root)], root, 1)]
+
     for level in range(1, height):
         next_level = []
-        for cur_list, cur_root, cur_level in cur_level:
+        for cur_list, cur_root, cur_level_num in cur_level:
             left_leaf = l_leaf(cur_root)
             right_leaf = r_leaf(cur_root)
 
@@ -71,17 +74,17 @@ def build_tree_iterative(height=6, root=2, l_leaf=lambda x: x*3, r_leaf=lambda y
 
 
 def benchmark(func, data, number=5, repeat=2):
-    """
-     Проводит бенчмаркинг функции на наборе данных.
-     Args:
-         func (callable): Функция для тестирования
-         data (list): Входные данные для функции
-         number (int): Количество выполнений функции за одно измерение
-         repeat (int): Количество повторений измерений
+    """Проводит бенчмаркинг функции на наборе данных.
 
-     Returns:
-         float: Среднее минимальное время выполнения функции на одном элементе данных
-     """
+    Args:
+        func (callable): Функция для тестирования
+        data (list): Входные данные для функции
+        number (int): Количество выполнений функции за одно измерение
+        repeat (int): Количество повторений измерений
+
+    Returns:
+        float: Среднее минимальное время выполнения функции на одном элементе
+    """
     total = 0
     for n in data:
         times = timeit.repeat(lambda: func(n), number=number, repeat=repeat)
@@ -90,18 +93,16 @@ def benchmark(func, data, number=5, repeat=2):
 
 
 def main():
+    """Основная функция программы
+
+    Проводит сравнительный анализ производительности алгоритмов
+    построения дерева и визуализирует результаты.
     """
-        Основная функция программы
-        Проводит сравнительный анализ производительности алгоритмов
-        построения дерева и визуализирует результаты
-        """
     random.seed(42)
     test_data = list(range(1, 18))
 
     res_recursive = []
     res_iterative = []
-
-
 
     for n in test_data:
         res_recursive.append(benchmark(build_tree_recursive, [n], number=5, repeat=2))
@@ -109,7 +110,7 @@ def main():
 
     plt.figure(figsize=(12, 8))
 
-    plt.plot(test_data, res_recursive, label="Рекурсивное построение дерева",  markersize=2)
+    plt.plot(test_data, res_recursive, label="Рекурсивное построение дерева", markersize=2)
     plt.plot(test_data, res_iterative, label="Итеративное построение дерева", markersize=2)
     plt.xlabel("Высота дерева")
     plt.ylabel("Время (сек)")
@@ -120,7 +121,5 @@ def main():
     plt.show()
 
 
-
 if __name__ == "__main__":
     main()
-
