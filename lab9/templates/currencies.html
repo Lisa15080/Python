@@ -1,0 +1,123 @@
+<!--<h2>Валюты</h2>-->
+
+<!--&lt;!&ndash; Форма добавления новой валюты &ndash;&gt;-->
+<!--<h3>Добавить новую валюту</h3>-->
+<!--<form method="POST" action="/currencies">-->
+<!--    <input type="hidden" name="action" value="create">-->
+<!--    <label>CharCode: <input type="text" name="char_code" required></label>-->
+<!--    <label>Название: <input type="text" name="name" required></label>-->
+<!--    <label>Курс (оставьте пустым для автообновления с ЦБ): <input type="number" step="0.01" name="value"></label>-->
+<!--    <label>Номинал: <input type="number" name="nominal" value="1" required></label>-->
+<!--    <button type="submit">Добавить</button>-->
+<!--</form>-->
+
+<!--&lt;!&ndash; Таблица валют &ndash;&gt;-->
+<!--<table id="currencies" class="table table-striped" border="1" cellpadding="5">-->
+<!--<tr>-->
+<!--<th>ID</th>-->
+<!--<th>CharCode</th>-->
+<!--<th>Name</th>-->
+<!--<th>Value</th>-->
+<!--<th>Nominal</th>-->
+<!--<th>Обновить</th>-->
+<!--<th>Обновить с ЦБ</th>-->
+<!--<th>Удалить</th>-->
+<!--</tr>-->
+<!--{% for item in currencies %}-->
+<!--<tr>-->
+<!--    <td>{{ item.id }}</td>-->
+<!--    <td>{{ item.char_code }}</td>-->
+<!--    <td>{{ item.name }}</td>-->
+<!--    <td>-->
+<!--        &lt;!&ndash; Форма для обновления курса вручную &ndash;&gt;-->
+<!--        <form method="POST" action="/currencies" style="display:inline;">-->
+<!--            <input type="hidden" name="action" value="update">-->
+<!--            <input type="hidden" name="char_code" value="{{ item.char_code }}">-->
+<!--            <input type="number" step="0.01" name="value" value="{{ item.value }}">-->
+<!--            <button type="submit">Обновить</button>-->
+<!--        </form>-->
+<!--    </td>-->
+<!--    <td>{{ item.nominal }}</td>-->
+<!--    <td>-->
+<!--        &lt;!&ndash; Пусто или дополнительные действия &ndash;&gt;-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        &lt;!&ndash; Форма для обновления курса через API ЦБ &ndash;&gt;-->
+<!--        <form method="POST" action="/currencies" style="display:inline;">-->
+<!--            <input type="hidden" name="action" value="update">-->
+<!--            <input type="hidden" name="char_code" value="{{ item.char_code }}">-->
+<!--            &lt;!&ndash; Не передаём value, чтобы обновление брало данные с ЦБ &ndash;&gt;-->
+<!--            <button type="submit">Обновить с ЦБ</button>-->
+<!--        </form>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        &lt;!&ndash; Форма для удаления валюты &ndash;&gt;-->
+<!--        <form method="POST" action="/currencies" style="display:inline;">-->
+<!--            <input type="hidden" name="action" value="delete">-->
+<!--            <input type="hidden" name="id" value="{{ item.id }}">-->
+<!--            <button type="submit">Удалить</button>-->
+<!--        </form>-->
+<!--    </td>-->
+<!--</tr>-->
+<!--{% endfor %}-->
+<!--</table>-->
+
+<h2>Валюты</h2>
+
+<!-- Форма добавления новой валюты -->
+<h3>Добавить новую валюту</h3>
+<form method="POST" action="/currencies">
+    <input type="hidden" name="action" value="create">
+    <label>CharCode: <input type="text" name="char_code" required></label>
+    <label>Название: <input type="text" name="name" required></label>
+    <label>Курс (оставьте пустым для автообновления с ЦБ): <input type="number" step="0.01" name="value"></label>
+    <label>Номинал: <input type="number" name="nominal" value="1" required></label>
+    <button type="submit">Добавить</button>
+</form>
+
+<!-- Таблица валют -->
+<table id="currencies" class="table table-striped" border="1" cellpadding="5">
+<tr>
+<th>ID</th>
+<th>CharCode</th>
+<th>Name</th>
+<th>Value</th>
+<th>Nominal</th>
+<th>Обновить с ЦБ</th>
+<th>Удалить</th>
+</tr>
+{% for item in currencies %}
+<tr>
+    <td>{{ item.id }}</td>
+    <td>{{ item.char_code }}</td>
+    <td>{{ item.name }}</td>
+    <td>
+        <!-- Форма для обновления курса вручную -->
+        <form method="POST" action="/currencies" style="display:inline;">
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="char_code" value="{{ item.char_code }}">
+            <input type="number" step="0.01" name="value" value="{{ item.value }}">
+            <button type="submit">Обновить</button>
+        </form>
+    </td>
+    <td>{{ item.nominal }}</td>
+    <td>
+        <!-- Форма для обновления курса через API ЦБ -->
+        <form method="POST" action="/currencies" style="display:inline;">
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="char_code" value="{{ item.char_code }}">
+            <!-- Не передаём value, чтобы обновление брало данные с ЦБ -->
+            <button type="submit">Обновить с ЦБ</button>
+        </form>
+    </td>
+    <td>
+        <!-- Форма для удаления валюты -->
+        <form method="POST" action="/currencies" style="display:inline;">
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="id" value="{{ item.id }}">
+            <button type="submit">Удалить</button>
+        </form>
+    </td>
+</tr>
+{% endfor %}
+</table>

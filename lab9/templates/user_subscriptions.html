@@ -1,0 +1,47 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <title>Подписки пользователя</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Подписки пользователя {{ user.name }}</h1>-->
+
+<!--    <ul>-->
+<!--    {% for sub in subscriptions %}-->
+<!--        <li>-->
+<!--            {{ sub.char_code }} — {{ sub.name }}: {{ sub.value }}-->
+<!--        </li>-->
+<!--    {% endfor %}-->
+<!--    </ul>-->
+
+<!--    <p><a href="/users">Назад</a></p>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Подписки пользователя {{ user.name }}</title>
+</head>
+<body>
+    <header>
+        <h1>Подписки пользователя {{ user.name }}</h1>
+    </header>
+
+    {% if subscriptions %}
+        <ul>
+        {% for sub in subscriptions %}
+            <li>
+                {{ sub.char_code }} — {{ sub.name }}: {{ "%.2f"|format(sub.value) }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>У пользователя нет подписок на валюты.</p>
+    {% endif %}
+
+    <footer>
+        <p><a href="/users">Назад к списку пользователей</a></p>
+    </footer>
+</body>
+</html>

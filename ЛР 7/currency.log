@@ -1,0 +1,4 @@
+INFO: Start get_currencies_file_logged with args=(['USD', 'EUR'],), kwargs={}
+
+INFO: Finished get_currencies_file_logged with result={'USD': 76.0937, 'EUR': 88.7028}
+

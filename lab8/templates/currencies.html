@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Курсы валют</title>
+</head>
+<body>
+    <h1>Список валют</h1>
+
+    <ul>
+    {% for currency in currencies %}
+        <li>
+            {{ currency.char_code }} — {{ currency.name }}: {{ currency.value }} (номинал {{ currency.nominal }})
+        </li>
+    {% endfor %}
+    </ul>
+
+    <p><a href="/">Главная</a></p>
+</body>
+</html>
