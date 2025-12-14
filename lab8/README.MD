@@ -54,32 +54,47 @@
 ## Структура проекта
 lab8/
 ├── models/ # Модели
+
 │   ├── __init__.py
+
 │   ├── app.py # Модель приложения 
+
 │   ├── author.py # Модель автора 
+
 │   ├── currency.py # Модель валюты 
+
 │   ├── user.py # Модель пользователя 
+
 │   └── user_currency.py # Модель связи между User и Currency
-├── my_env/ # Виртуальное окружение 
-│   ├── bin/
-│   ├── include/
-│   ├── lib/
-│   ├── .gitignore
-│   ├── __init__.py
-│   └── pyvenv.cfg
+
+├── my_env/ # Виртуальное окружение
+
 ├── static/ # Статические файлы (изображения)
+
 ├── templates/ # Шаблоны Jinja2 для рендеринга HTML
+
 │   ├── author.html # Страница информации об авторе
+
 │   ├── currencies.html # Страница со списком всех валют
+
 │   ├── index.html # Главная страница
+
 │   ├── user_subscriptions.html # Страница подписок пользователя
+
 │   └── users.html # Страница со списком пользователей
+
 ├── tests/ # Тесты приложения
+
 │   └── tests.py # Общие тесты
+
 ├── utils/ # Утилиты и вспомогательные функции
+
 │   └── currencies_api.py # Функция get_currencies() — запрос к API ЦБ РФ
+
 ├── __init__.py
+
 ├── myapp.py # Основной запускаемый файл приложения
+
 └── README.md # Отчет
 
 ## Реализация моделей
@@ -185,6 +200,7 @@ class TestGetCurrenciesFunction(unittest.TestCase):
         with self.assertRaises(KeyError):
             get_currencies(['XYZ'])
 ```
+![img.png](static/тесты.png)
 
 # Выводы
 * Реализация MVC

@@ -52,37 +52,57 @@
 ## Структура проекта
 lab9/
 ├── controllers/ # Контроллеры
+
 │   ├── __init__.py # Инициализация
+
 │   ├── currencycontroller.py # Контроллер для работы с валютами
+
 │   └── databasecontroller.py # Инфраструктурный контроллер для работы с SQLite
+
 ├── models/ # Модели
+
 │   ├── __init__.py
+
 │   ├── app.py # Модель приложения 
+
 │   ├── author.py # Модель автора 
+
 │   ├── currency.py # Модель валюты 
+
 │   ├── user.py # Модель пользователя 
+
 │   └── user_currency.py # Модель связи между User и Currency
-├── my_env/ # Виртуальное окружение 
-│   ├── bin/
-│   ├── include/
-│   ├── lib/
-│   ├── .gitignore
-│   ├── __init__.py
-│   └── pyvenv.cfg
+
+├── my_env/ # Виртуальное окружение
+
 ├── static/ # Статические файлы (изображения)
+
 ├── templates/ # Шаблоны Jinja2 для рендеринга HTML
+
 │   ├── author.html # Страница информации об авторе
+
 │   ├── currencies.html # Страница со списком всех валют
+
 │   ├── index.html # Главная страница
+
 │   ├── user_subscriptions.html # Страница подписок пользователя
+
 │   └── users.html # Страница со списком пользователей
+
 ├── tests/ # Тесты приложения
+
 │   ├── test_crud.py # Тесты CRUD-операций
+
 │   └── tests.py # Общие тесты
+
 ├── utils/ # Утилиты и вспомогательные функции
+
 │   └── currencies_api.py # Функция get_currencies() — запрос к API ЦБ РФ
+
 ├── __init__.py
+
 ├── myapp.py # Основной запускаемый файл приложения
+
 └── README.md # Отчет
 
 ## Реализация моделей
@@ -147,14 +167,15 @@ currency_delete(currency_id)
 
 ## Скриншоты работы приложения
 ![img.png](static/Главная.png)
-![img.png](static/Список пользователей.png)
-![img.png](static/подписки пользователя.png)
+![img.png](static/Список_пользователей.png)
+![img.png](static/подписки_пользователя.png)
 ![img.png](static/Валюты.png)
 * Результат добавления валюты
-![img.png](static/Добавление валюты.png)
+![img.png](static/Добавление_валюты.png)
 * Результат удаления валюты
-![img.png](static/Удаление валюты.png)
+![img.png](static/Удаление_валюты.png)
 ![img.png](static/Терминал.png)
+
 
 ## Примеры тестов
 Пример тест для модели
