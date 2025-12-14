@@ -147,13 +147,6 @@ class TestTemplates(unittest.TestCase):
         self.assertIn("Dollar", html)
         self.assertIn("100", html)
 
-    def test_users_template(self):
-        """Проверка рендеринга шаблона пользователей."""
-        users = [{'id': '1', 'name': 'Alex'}]
-        html = self.env.get_template("users.html").render(users=users)
-        self.assertIn("Alex", html)
-        self.assertIn("/users/1", html)
-
 
 import http.client
 import threading

@@ -2,7 +2,6 @@
 
 <h2>Валюты</h2>
 
-<!-- Форма добавления новой валюты -->
 <h3>Добавить новую валюту</h3>
 <form method="POST" action="/currencies">
     <input type="hidden" name="action" value="create">
@@ -13,7 +12,6 @@
     <button type="submit">Добавить</button>
 </form>
 
-<!-- Таблица валют -->
 <table id="currencies" class="table table-striped" border="1" cellpadding="5">
 <tr>
 <th>ID</th>
@@ -30,7 +28,6 @@
     <td>{{ item.char_code }}</td>
     <td>{{ item.name }}</td>
     <td>
-        <!-- Форма для обновления курса вручную -->
         <form method="POST" action="/currencies" style="display:inline;">
             <input type="hidden" name="action" value="update">
             <input type="hidden" name="char_code" value="{{ item.char_code }}">
@@ -40,7 +37,6 @@
     </td>
     <td>{{ item.nominal }}</td>
     <td>
-        <!-- Форма для обновления курса через API ЦБ -->
         <form method="POST" action="/currencies" style="display:inline;">
             <input type="hidden" name="action" value="update">
             <input type="hidden" name="char_code" value="{{ item.char_code }}">
@@ -49,7 +45,6 @@
         </form>
     </td>
     <td>
-        <!-- Форма для удаления валюты -->
         <form method="POST" action="/currencies" style="display:inline;">
             <input type="hidden" name="action" value="delete">
             <input type="hidden" name="id" value="{{ item.id }}">

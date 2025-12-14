@@ -17,7 +17,7 @@
 
 Приложение моделирует систему управления пользователями и их подписками на валюты.
 
-### Сущности:
+### Модели
 
 - **Author** — автор приложения  
   - name  
@@ -51,45 +51,39 @@
 
 ## Структура проекта
 lab9/
-├── controllers/              # Контроллеры 
-│   ├── __init__.py           # Инициализация 
-│   ├── currencycontroller.py # Контроллер для работы с валютами 
+├── controllers/ # Контроллеры
+│   ├── __init__.py # Инициализация
+│   ├── currencycontroller.py # Контроллер для работы с валютами
 │   └── databasecontroller.py # Инфраструктурный контроллер для работы с SQLite
-│
-├── models/                   # Модели
-│   ├── __init__.py           
-│   ├── app.py                # Модель приложения (name, version, author)
-│   ├── author.py             # Модель автора (name, group)
-│   ├── currency.py           # Модель валюты (id, char_code, value и т.д.)
-│   ├── user.py               # Модель пользователя (id, name)
-│   └── user_currency.py      # Модель связи "многие ко многим" между User и Currency
-│
-├── my_env/                   # Виртуальное окружение (создано через venv/pyenv)
-│   ├── bin/                  
-│   ├── include/              
-│   ├── lib/                  
-│   ├── .gitignore            
-│   ├── __init__.py           
-│   └── pyvenv.cfg            
-│
-├── static/                   # Статические файлы (изображения)
-│
-├── templates/                # Шаблоны Jinja2 для рендеринга HTML
-│   ├── author.html           # Страница информации об авторе
-│   ├── currencies.html       # Страница со списком всех валют
-│   ├── index.html            # Главная страница
+├── models/ # Модели
+│   ├── __init__.py
+│   ├── app.py # Модель приложения 
+│   ├── author.py # Модель автора 
+│   ├── currency.py # Модель валюты 
+│   ├── user.py # Модель пользователя 
+│   └── user_currency.py # Модель связи между User и Currency
+├── my_env/ # Виртуальное окружение 
+│   ├── bin/
+│   ├── include/
+│   ├── lib/
+│   ├── .gitignore
+│   ├── __init__.py
+│   └── pyvenv.cfg
+├── static/ # Статические файлы (изображения)
+├── templates/ # Шаблоны Jinja2 для рендеринга HTML
+│   ├── author.html # Страница информации об авторе
+│   ├── currencies.html # Страница со списком всех валют
+│   ├── index.html # Главная страница
 │   ├── user_subscriptions.html # Страница подписок пользователя
-│   └── users.html            # Страница со списком пользователей
-│
-├── tests/                    # Тесты приложения
-│   ├── test_crud.py          # Тесты CRUD-операций 
-│   └── tests.py              # Общие тесты 
-│
-├── utils/                   # Утилиты и вспомогательные функции
-│   └──currencies_api.py     # Функция get_currencies() — запрос к API ЦБ РФ
-├── __init__.py              
-├── myapp.py                 # Основной запускаемый файл приложения
-└── README.md                # Документация проекта (описание, цели, как запустить)
+│   └── users.html # Страница со списком пользователей
+├── tests/ # Тесты приложения
+│   ├── test_crud.py # Тесты CRUD-операций
+│   └── tests.py # Общие тесты
+├── utils/ # Утилиты и вспомогательные функции
+│   └── currencies_api.py # Функция get_currencies() — запрос к API ЦБ РФ
+├── __init__.py
+├── myapp.py # Основной запускаемый файл приложения
+└── README.md # Отчет
 
 ## Реализация моделей
 
@@ -105,15 +99,15 @@ lab9/
 * профиль пользователя;
 * курсы валют.
 
-Для каждого формируется контекст и рендерится шаблон. При некорректном `id` возвращается `404`.
+Для каждого формируется контекст и рендерится шаблон. 
 
 ## Jinja2
 
-Шаблонизатор инициализируется один раз при старте: `Environment` с `FileSystemLoader("templates")`. Это даёт кэширование и повышает производительность. При запросе шаблон подставляется с данными и отправляется как HTML.
+Шаблонизатор инициализируется один раз при старте: `Environment` с `FileSystemLoader("templates")`. При запросе шаблон подставляется с данными и отправляется как HTML.
 
 ## Курсы валют
 
-Функция `get_currencies` (в `utils/currencies_api.py`) запрашивает XML от ЦБ РФ через `urllib`, парсит его, преобразует значение курса (заменяя запятую на точку) и создаёт объекты `Currency`. Ошибки сети или парсинга перехватываются, пользователь видит понятное сообщение.
+Функция `get_currencies` (в `utils/currencies_api.py`) запрашивает XML от ЦБ РФ через `urllib`, парсит его, преобразует значение курса и создаёт объекты `Currency`. Ошибки сети или парсинга перехватываются.
 
 На странице `/currencies` отображаются все валюты, а на `/user` — только подписанные (через связь `UserCurrency`).
 
@@ -231,11 +225,32 @@ class TestGetCurrenciesFunction(unittest.TestCase):
         with self.assertRaises(KeyError):
             get_currencies(['XYZ'])
 ```
-Все тесты приложения проходит.
+
+
+Примеры теста CRUD
+```python
+class TestCurrencyController(unittest.TestCase):
+    def setUp(self):
+        self.mock_db = MagicMock(spec=DatabaseController)
+        self.controller = CurrencyController(self.mock_db)
+
+    def test_update_currency(self):
+        """Проверка обновления курса валюты."""
+        self.controller.update_currency("EUR", 95.0)
+        self.mock_db.currency_update.assert_called_once_with("EUR", 95.0)
+
+    def test_update_negative_value(self):
+        """Обновление валюты с отрицательным значением (контроллер просто передаёт в БД)."""
+        self.controller.update_currency("GBP", -10.0)
+        self.mock_db.currency_update.assert_called_once_with("GBP", -10.0)
+```
+Все тесты приложение проходит.
+![img.png](static/тесты1.png)
+![img.png](static/тесты2.png)
 
 
 ## Выводы
-# Реализация MVC
+* Реализация MVC
 Model (Модель)
 
 — Это доменные объекты, описанные в папке models/: Author, User, Currency, UserCurrency.
