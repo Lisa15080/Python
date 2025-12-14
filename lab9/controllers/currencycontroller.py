@@ -1,7 +1,3 @@
-# Было:
-# from lab9.controllers.databasecontroller import CurrencyRatesCRUD
-
-# Стало:
 from lab9.controllers.databasecontroller import DatabaseController
 
 

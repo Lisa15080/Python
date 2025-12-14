@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>{{ myapp }}</title>
 </head>
 <body>
     <header>
-        <h1>{{ myapp }}</h1>
-        <p>Автор проекта: {{ author_name }}</p>
-        <p>Группа: {{ group }}</p>
+        <h1>Клиент-серверное приложение для отображения курсов валют</h1>
+        <p>Описание функционала:</p>
+        <ul>
+            <li>просмотр курсов валют</li>
+            <li>обновление, удаление курсов валют</li>
+            <li>работа с пользователями</li>
+            <li>подписанные пользователями валюты</li>
+            <li>отображение информации об авторе проекта</li>
+        </ul>
+
+        <p><strong>Автор проекта:</strong> {{ author_name }}</p>
+        <p><strong>Группа:</strong> {{ group }}</p>
     </header>
 
     <nav id="navigation">
@@ -22,5 +31,26 @@
 </html>
 
 
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--&lt;!&ndash;    <title>{{ myapp }}</title>&ndash;&gt;-->
+<!--    <h1>{{ myapp }}</h1>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <header>-->
+<!--        <p>Автор проекта: {{ author_name }}</p>-->
+<!--        <p>Группа: {{ group }}</p>-->
+<!--    </header>-->
 
-<
+<!--    <nav id="navigation">-->
+<!--        <ul>-->
+<!--        {% for item in navigation %}-->
+<!--            <li><a href="{{ item.href }}">{{ item.caption }}</a></li>-->
+<!--        {% endfor %}-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</body>-->
+<!--</html>-->
+
+
