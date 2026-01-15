@@ -1,4 +1,4 @@
-# core.py
+
 import math
 from typing import Callable
 import concurrent.futures as ftres
